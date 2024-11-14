@@ -1,0 +1,19 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"  # Expose the frontend app on port 3000
+    depends_on:
+      - backend  # Ensure the backend is started before the frontend
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"  # Expose the backend app on port 5000
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./backend:/app  # Mount the backend code for development (optional)

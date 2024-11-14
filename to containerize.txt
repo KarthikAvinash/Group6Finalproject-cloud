@@ -1,0 +1,27 @@
+cd frontend
+docker build -t karthikavinash01/frontend:latest .
+docker images
+docker push karthikavinash01/frontend:latest
+cd ..
+cd backend
+docker build -t karthikavinash01/backend:latest .
+docker push karthikavinash01/backend:latest
+
+>Go to shell in the IBM Cloud Console: https://cloud.ibm.com/shell
+ibmcloud plugin install container-registry -r 'IBM Cloud'
+ibmcloud login -a https://cloud.ibm.com
+ibmcloud cr region-set us-south
+ibmcloud cr namespace-add ibm_cloud_project
+ibmcloud cr login
+
+docker login
+docker pull karthikavinash01/frontend
+docker pull karthikavinash01/backend
+
+docker tag karthikavinash01/frontend us.icr.io/ibm_cloud_project/frontend:latest
+docker tag karthikavinash01/backend us.icr.io/ibm_cloud_project/backend:latest
+
+docker push us.icr.io/ibm_cloud_project/backend1:latest
+docker push us.icr.io/ibm_cloud_project/frontend1:latest
+
+ibmcloud cr image-list
