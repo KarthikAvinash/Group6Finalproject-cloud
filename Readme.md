@@ -34,19 +34,24 @@ Ensure the following tools are installed on your system:
 ## Setup Instructions
 
 ### 1. Clone the Repository
-Clone this repository to your local machine:
+Clone this repository to your local machine and navigate to the project directory:
+
 ```bash
 git clone https://github.com/KarthikAvinash/Group6Finalproject-cloud.git
-cd your-repository
-- run the following commands in both directories: 
+cd Group6Finalproject-cloud
+```
+Run the following command in both the frontend and backend directories to install the required dependencies:
 ```
 npm i
+```
 ```
 
 - then run this in both the directories: 
 ```
+Then run this in both the directories: 
+```
 npm start
-
+```
 
 ## Screenshots
 
