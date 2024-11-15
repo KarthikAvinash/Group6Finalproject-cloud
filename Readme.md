@@ -120,11 +120,11 @@ sequenceDiagram
 ```
 
 ### Architecture Components:
-- User/Browser (U): The end-user accessing the application.
-- React Frontend (R): The client-side application built with React acting as a microservice.
-- Node.js Backend (N): The server-side application handling API requests, acting as a microservice.
-- File Storage (F): Data is stored in JSON files (users.json, courses.json) on the server.
-- Google OAuth (G): Third-party authentication service using OAuth2 protocol.
+- **User/Browser (U)**: The end-user accessing the application.
+- **React Frontend (R)**: The client-side application built with React acting as a microservice.
+- **Node.js Backend (N)**: The server-side application handling API requests, acting as a microservice.
+- **File Storage (F)**: Data is stored in JSON files (users.json, courses.json) on the server.
+- **Google OAuth (G)**: Third-party authentication service using OAuth2 protocol.
 
 ---
 
