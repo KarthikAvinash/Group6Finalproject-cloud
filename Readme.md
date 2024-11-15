@@ -10,7 +10,7 @@ This repository demonstrates how to containerize and run a MERN stack applicatio
 2. [Prerequisites](#prerequisites)
 3. [Setup Instructions](#setup-instructions)
 4. [Screenshots](#screenshots)
-5. [Live Demo](#livedemo)
+5. [Live Demo](#live-demo)
 
 ## Overview
 
@@ -74,7 +74,6 @@ npm start
 Check out the live application hosted on IBM Cloud:
 👉 [Live Demo Link](https://group6frontend.1o809c3feyfk.us-south.codeengine.appdomain.cloud/)
 
-```
 
 
 
