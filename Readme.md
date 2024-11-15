@@ -351,6 +351,11 @@ Experience the live application hosted on IBM Cloud:
 👉 [App Hosted on Cloud Using IBM Code Engine](https://group6frontend.1o809c3feyfk.us-south.codeengine.appdomain.cloud/)
 
 --- 
+## Testing Apis
+
+### GET/courses 
+-Get all the courses available
+---
 ## Notes
 
 - **Data Storage:** The application uses JSON files (`users.json`, `courses.json`) to store user and course data instead of a database. This approach simplifies deployment and testing but is not recommended for production environments due to scalability and security considerations.
