@@ -45,7 +45,7 @@ npm i
 - then run this in both the directories: 
 ```
 npm start
-```
+
 
 ## Screenshots
 
@@ -63,6 +63,8 @@ npm start
 
 ### Delete Course
 <img width="462" alt="image" src="https://github.com/user-attachments/assets/ed97d0ff-ade2-412d-9a17-cae582909784">
+
+```
 
 
 
