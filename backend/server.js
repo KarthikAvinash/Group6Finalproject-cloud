@@ -105,7 +105,7 @@ app.post('/auth/signin', async (req, res) => {
     // Generate JWT
     const token = jwt.sign({ username: user.username }, JWT_SECRET, { expiresIn: '1h' });
     res.cookie('token', token, { httpOnly: true });
-    res.json({ message: 'Logged in successfully', 'token': token });
+    res.json({ message: 'Logged in successfully' });
 });
 
 // Google OAuth routes
@@ -185,7 +185,7 @@ app.delete('/course/:id', authenticateJWT, (req, res) => {
     if (index !== -1) {
         const deletedCourse = courses.splice(index, 1);
         writeJSON('courses.json', courses);
-        res.json({ message: "Deleted course successfully", "deleted_course": deletedCourse[0] });
+        res.json(deletedCourse[0]);
     } else {
         res.status(404).json({ message: 'Course not found' });
     }

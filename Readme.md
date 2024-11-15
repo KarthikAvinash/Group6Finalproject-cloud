@@ -10,7 +10,7 @@ This repository contains the **MyCourses App**, a web application built using a 
 
 - [Overview](#overview)
 - [Features](#features)
-- [Architecture and Sequence Diagram](#architecture-and-sequence-diagram)
+- [Architecture and Sequence Diagram](#architecture)
 - [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
 - [Environment Variables](#environment-variables)
@@ -18,8 +18,10 @@ This repository contains the **MyCourses App**, a web application built using a 
 - [Usage](#usage)
 - [Deployment on IBM Cloud](#deployment-on-ibm-cloud)
 - [Screenshots](#screenshots)
+- [Testing Apis - Postman](#testing-apis---postman)
 - [Live Demo 🌐](#live-demo-)
 - [Testing Apis](#testing-apis)
+- [Authors](#authors)
 - [Notes](#notes)
 
 ---
@@ -87,45 +89,77 @@ sequenceDiagram
     R->>N: 3. Request Auth Status
     N->>R: 4. Return Unauthenticated
 
+    %% User Signup Flow
+    U->>R: 5. Navigate to Sign Up Page
+    R->>U: 6. Display Sign Up Form
+    U->>R: 7. Submit Sign Up Form (username, password)
+    R->>N: 8. POST /auth/signup (username, password)
+    N->>F: 9. Read users.json
+    F->>N: 10. Return Users Data
+    N->>N: 11. Check if User Exists
+    alt User Exists
+        N->>R: 12. Respond with 400 Bad Request (User already exists)
+        R->>U: 13. Display Error Message
+    else New User
+        N->>N: 14. Hash Password
+        N->>F: 15. Write to users.json
+        F->>N: 16. Confirm Write
+        N->>R: 17. Respond with 201 Created (User created)
+        R->>U: 18. Display Success Message
+    end
+
     %% OAuth2 Authentication Flow
-    U->>R: 5. Click "Sign In with Google"
-    R->>N: 6. Initiate OAuth2 Flow
-    N->>G: 7. Redirect to Google OAuth2 Endpoint
-    U->>G: 8. Authenticate with Google
-    G->>N: 9. Redirect Back with Auth Code
-    N->>G: 10. Exchange Auth Code for Tokens
-    G->>N: 11. Provide Access Token
+    U->>R: 19. Click "Sign In with Google"
+    R->>N: 20. Initiate OAuth2 Flow
+    N->>G: 21. Redirect to Google OAuth2 Endpoint
+    U->>G: 22. Authenticate with Google
+    G->>N: 23. Redirect Back with Auth Code
+    N->>G: 24. Exchange Auth Code for Tokens
+    G->>N: 25. Provide Access Token
 
     %% User Profile & Session Creation
-    N->>F: 12. Fetch/Create User Profile in users.json
-    F->>N: 13. Return User Data
-    N->>N: 14. Create Session (e.g., JWT Cookie)
-    N->>R: 15. Confirm Authentication
-    R->>U: 16. User Logged In
+    N->>F: 26. Fetch/Create User Profile in users.json
+    F->>N: 27. Return User Data
+    N->>N: 28. Create Session (Set JWT Token in HTTP-only Cookie)
+    N->>R: 29. Confirm Authentication
+    R->>U: 30. User Logged In
 
     %% Course Data Flow
-    U->>R: 17. Interact with App (e.g., View Courses)
-    R->>N: 18. Request Data (Courses)
-    N->>F: 19. Read courses.json
-    F->>N: 20. Return Data
-    N->>R: 21. Send Data
-    R->>U: 22. Display Data
+    U->>R: 31. Interact with App (e.g., View Courses)
+    R->>N: 32. Request Data (Courses) with JWT Token
+    N->>N: 33. Verify JWT Token
+    alt Token Valid
+        N->>F: 34. Read courses.json
+        F->>N: 35. Return Courses Data
+        N->>R: 36. Send Courses Data
+        R->>U: 37. Display Courses
+    else Token Invalid
+        N->>R: 38. Respond with 403 Forbidden
+        R->>U: 39. Redirect to Sign In
+    end
 
     %% CRUD Operations
-    U->>R: 23. Add/Edit/Delete Course
-    R->>N: 24. Send Course Data
-    N->>F: 25. Update courses.json
-    F->>N: 26. Confirm Update
-    N->>R: 27. Confirm Action
-    R->>U: 28. Update UI
+    U->>R: 40. Add/Edit/Delete Course
+    R->>N: 41. Send Course Data with JWT Token
+    N->>N: 42. Verify JWT Token
+    alt Token Valid
+        N->>F: 43. Update courses.json
+        F->>N: 44. Confirm Update
+        N->>R: 45. Confirm Action (e.g., Course Added)
+        R->>U: 46. Update UI with New Course
+    else Token Invalid
+        N->>R: 47. Respond with 403 Forbidden
+        R->>U: 48. Redirect to Sign In
+    end
+
 ```
 
 ### Architecture Components:
-- **User/Browser (U)**: The end-user accessing the application.
-- **React Frontend (R)**: The client-side application built with React acting as a microservice.
-- **Node.js Backend (N)**: The server-side application handling API requests, acting as a microservice.
-- **File Storage (F)**: Data is stored in JSON files (users.json, courses.json) on the server.
-- **Google OAuth (G)**: Third-party authentication service using OAuth2 protocol.
+- User/Browser (U): The end-user accessing the application.
+- React Frontend (R): The client-side application built with React acting as a microservice.
+- Node.js Backend (N): The server-side application handling API requests, acting as a microservice.
+- File Storage (F): Data is stored in JSON files (users.json, courses.json) on the server.
+- Google OAuth (G): Third-party authentication service using OAuth2 protocol.
 
 ---
 
@@ -330,64 +364,64 @@ These steps were taken to containerize the application and deploy it on IBM Clou
 ## ScreenShots
 
 ### Authentication
-<img width="1088" alt="image" src="https://github.com/user-attachments/assets/2b22bff7-a7dd-47a6-86fd-f382e60d969b">
+<img src="images/Authentication.png" alt="Authentication" width="600" height="400">
 
 ### OAuth
-<img width="522" alt="image" src="https://github.com/user-attachments/assets/9fac89fe-2d01-4166-abd2-08d8287c3c10">
+<img src="images/Oauth2.png" alt="OAuth2 Authentication" width="600" height="400">
 
 ### Get All Courses
-<img width="1043" alt="image" src="https://github.com/user-attachments/assets/42f5d180-ca91-4e00-9585-19e605ca52fd">
+<img src="images/Get%20All%20Courses.png" alt="Get All Courses" width="600" height="400">
 
 ### Add Course
-<img width="1038" alt="image" src="https://github.com/user-attachments/assets/174c83df-83ed-48c6-9f9f-dea4d041fc47">
+<img src="images/Add%20Course.png" alt="Add Course" width="600" height="400">
 
 ### Update Course
-<img width="1045" alt="image" src="https://github.com/user-attachments/assets/b5d2ed60-abbe-41ec-9d26-16145a812277">
+<img src="images/Update%20Course.png" alt="Update Course" width="600" height="400">
 
 ### Delete Course
-<img width="462" alt="image" src="https://github.com/user-attachments/assets/ed97d0ff-ade2-412d-9a17-cae582909784">
+<img src="images/Delete%20Course.png" alt="Delete Course" width="600" height="400">
+
+---
 
 ## Live Demo 🌐
 Experience the live application hosted on IBM Cloud:
 👉 [App Hosted on Cloud Using IBM Code Engine](https://group6frontend.1o809c3feyfk.us-south.codeengine.appdomain.cloud/)
 
 --- 
-## Testing Apis
-- Given below is the code and results of the APIs related to course. These APIs have been testing using **POSTMAN**.
-- All these apis have an **Auth Token** in the token for authentication and authorization. 
+## Testing Apis - Postman
+- Below are the code snippets and corresponding **Postman** outputs for the APIs related to course management. 
+- These APIs have been **tested** using Postman. All APIs require an **Auth Token** for authentication.
 
 ### GET /courses 
 - Get all the courses available
-<img width="1088" alt="image" src="https://github.com/user-attachments/assets/cc5c56d9-10a9-4d4c-9f26-ee2c0d1281c2">
-<img width="1088" alt="image" src="https://github.com/user-attachments/assets/a3acc9a4-e2c9-4944-b609-f2f6658223ab">
+<table> <tr> <td><img src="images/Get%20All%20Courses%20Available%20Code.png" alt="Get All Courses Code" width="400" height="300"></td> <td><img src="images/Get%20All%20Courses%20Available%20Code%20Postman.png" alt="Get All Courses Postman Output" width="400" height="300"></td> </tr> </table>
 
 
 ### POST /course 
-- Add a new course
-<img width="1088" alt="image" src="https://github.com/user-attachments/assets/3f6e3554-edd2-479e-8544-9895c84fc8c6">
-
-<img width="1088" alt="image" src="https://github.com/user-attachments/assets/b445fc72-d5ee-4dd3-91d0-4f4b2575c38d">
-
+<table> <tr> <td><img src="images/Add%20a%20new%20Course%20Code.png" alt="Add Course Code" width="400" height="300"></td> <td><img src="images/Add%20a%20new%20Course%20Code%20Postman.png" alt="Add Course Postman Output" width="400" height="300"></td> </tr> </table>
 
 ### GET /course/id 
 - Get details of a course 
-
-<img width="1088" alt="image" src="https://github.com/user-attachments/assets/398d89cd-2dc7-410d-85ac-5376fbc393bb">
-<img width="1088" alt="image" src="https://github.com/user-attachments/assets/b0d0f948-78ed-4a88-84b3-be7f6c896a2e">
+<table> <tr> <td><img src="images/Get%20details%20of%20a%20course%20code.png" alt="Get Course Details Code" width="400" height="300"></td> <td><img src="images/Get%20details%20of%20a%20course%20code%20Postman.png" alt="Get Course Details Postman Output" width="400" height="300"></td> </tr> </table>
 
 ### UPDATE /course/id
 - Update details of the course
-<img width="1088" alt="image" src="https://github.com/user-attachments/assets/cc5c56d9-10a9-4d4c-9f26-ee2c0d1281c2">
-<img width="1088" alt="image" src="https://github.com/user-attachments/assets/a3acc9a4-e2c9-4944-b609-f2f6658223ab">
+<table> <tr> <td><img src="images/update%20details%20of%20a%20course%20code.png" alt="Update Course Code" width="400" height="300"></td> <td><img src="images/update%20details%20of%20a%20course%20code%20Postman.png" alt="Update Course Postman Output" width="400" height="300"></td> </tr> </table>
 
 ### DELETE /course/id
 - Delete a course by id
-<img width="1088" alt="image" src="https://github.com/user-attachments/assets/fe2d9d2b-9bd6-4968-bbb0-c4624e45883e">
-<img width="1088" alt="image" src="https://github.com/user-attachments/assets/061910c1-329c-4149-92bc-0ad0e3635d52">
-
-
+<table> <tr> <td><img src="images/delete%20course%20by%20id%20code.png" alt="Delete Course Code" width="400" height="300"></td> <td><img src="images/delete%20course%20by%20id%20code%20Postman.png" alt="Delete Course Postman Output" width="400" height="300"></td> </tr> </table>
 
 ---
+
+## Authors
+- Chaturth R *(21bcs025)*
+- Ekansh Thakur *(21bcs037)*
+- Jaishana Bindu Priya *(21bcs045)*
+- Karthik Avinash *(21bcs052)*
+- Tejas S *(21bcs125)*
+
+--- 
 ## Notes
 
 - **Data Storage:** The application uses JSON files (`users.json`, `courses.json`) to store user and course data instead of a database. This approach simplifies deployment and testing but is not recommended for production environments due to scalability and security considerations.
