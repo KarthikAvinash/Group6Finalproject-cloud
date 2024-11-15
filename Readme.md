@@ -10,7 +10,7 @@ This repository contains the **MyCourses App**, a web application built using a 
 
 - [Overview](#overview)
 - [Features](#features)
-- [Architecture and Sequence Diagram](#architecture)
+- [Architecture and Sequence Diagram](#architecture-and-sequence-diagram)
 - [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
 - [Environment Variables](#environment-variables)
@@ -19,6 +19,7 @@ This repository contains the **MyCourses App**, a web application built using a 
 - [Deployment on IBM Cloud](#deployment-on-ibm-cloud)
 - [Screenshots](#screenshots)
 - [Live Demo 🌐](#live-demo-)
+- [Testing Apis](#testing-apis)
 - [Notes](#notes)
 
 ---
@@ -352,9 +353,40 @@ Experience the live application hosted on IBM Cloud:
 
 --- 
 ## Testing Apis
+- Given below is the code and results of the APIs related to course. These APIs have been testing using **POSTMAN**.
+- All these apis have an **Auth Token** in the token for authentication and authorization. 
 
-### GET/courses 
--Get all the courses available
+### GET /courses 
+- Get all the courses available
+<img width="1088" alt="image" src="https://github.com/user-attachments/assets/cc5c56d9-10a9-4d4c-9f26-ee2c0d1281c2">
+<img width="1088" alt="image" src="https://github.com/user-attachments/assets/a3acc9a4-e2c9-4944-b609-f2f6658223ab">
+
+
+### POST /course 
+- Add a new course
+<img width="1088" alt="image" src="https://github.com/user-attachments/assets/3f6e3554-edd2-479e-8544-9895c84fc8c6">
+
+<img width="1088" alt="image" src="https://github.com/user-attachments/assets/b445fc72-d5ee-4dd3-91d0-4f4b2575c38d">
+
+
+### GET /course/id 
+- Get details of a course 
+
+<img width="1088" alt="image" src="https://github.com/user-attachments/assets/398d89cd-2dc7-410d-85ac-5376fbc393bb">
+<img width="1088" alt="image" src="https://github.com/user-attachments/assets/b0d0f948-78ed-4a88-84b3-be7f6c896a2e">
+
+### UPDATE /course/id
+- Update details of the course
+<img width="1088" alt="image" src="https://github.com/user-attachments/assets/cc5c56d9-10a9-4d4c-9f26-ee2c0d1281c2">
+<img width="1088" alt="image" src="https://github.com/user-attachments/assets/a3acc9a4-e2c9-4944-b609-f2f6658223ab">
+
+### DELETE /course/id
+- Delete a course by id
+<img width="1088" alt="image" src="https://github.com/user-attachments/assets/fe2d9d2b-9bd6-4968-bbb0-c4624e45883e">
+<img width="1088" alt="image" src="https://github.com/user-attachments/assets/061910c1-329c-4149-92bc-0ad0e3635d52">
+
+
+
 ---
 ## Notes
 
