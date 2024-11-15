@@ -1,3 +1,5 @@
+
+
 // server.js
 const express = require('express');
 const session = require('express-session');
@@ -6,11 +8,9 @@ const passport = require('./auth');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
-
-//comment this while deploying it on cloud...
-// require('dotenv').config();
 
 const app = express();
 
@@ -129,68 +129,19 @@ app.get('/auth/logout', (req, res) => {
     res.json({ message: 'Logged out' });
 });
 
-// Get all courses
-app.get('/courses', authenticateJWT, (req, res) => {
+// Get courses
+app.get('/api/courses', authenticateJWT, (req, res) => {
     const courses = readJSON('courses.json');
     res.json(courses);
 });
 
-// Get a specific course by ID
-app.get('/course/:id', authenticateJWT, (req, res) => {
+// Create course
+app.post('/api/courses', authenticateJWT, (req, res) => {
     const courses = readJSON('courses.json');
-    const course = courses.find(c => c.id === req.params.id);
-    if (course) {
-        res.json(course);
-    } else {
-        res.status(404).json({ message: 'Course not found' });
-    }
-});
-
-// Add a new course
-app.post('/course', authenticateJWT, (req, res) => {
-    const courses = readJSON('courses.json');
-    const newCourse = {
-        id: Date.now().toString(), // Simple unique ID
-        title: req.body.title,
-        details: req.body.details,
-        semester: req.body.semester,
-        enrollStatus: req.body.enrollStatus || false,
-    };
+    const newCourse = req.body;
     courses.push(newCourse);
     writeJSON('courses.json', courses);
     res.status(201).json(newCourse);
-});
-
-// Update an existing course
-app.put('/course/:id', authenticateJWT, (req, res) => {
-    const courses = readJSON('courses.json');
-    const index = courses.findIndex(c => c.id === req.params.id);
-    if (index !== -1) {
-        courses[index] = {
-            ...courses[index],
-            title: req.body.title,
-            details: req.body.details,
-            semester: req.body.semester,
-            enrollStatus: req.body.enrollStatus,
-        };
-        writeJSON('courses.json', courses);
-        res.json(courses[index]);
-    } else {
-        res.status(404).json({ message: 'Course not found' });
-    }
-});
-
-// Delete a course
-app.delete('/course/:id', authenticateJWT, (req, res) => {
-    let courses = readJSON('courses.json');
-    const index = courses.findIndex(c => c.id === req.params.id);
-    if (index !== -1) {
-        const deletedCourse = courses.splice(index, 1);
-        writeJSON('courses.json', courses);
-        res.json(deletedCourse[0]);
-    } else {
-        res.status(404).json({ message: 'Course not found' });
-    }
 });
 
 const PORT = process.env.PORT || 5000;

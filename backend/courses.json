@@ -1,23 +1,30 @@
 [
   {
-    "id": 1,
-    "title": "Cloud Computing",
-    "details": "An introduction to cloud computing concepts.",
-    "semester": "Fall 2024",
-    "enrollstatus": "Enrolled"
-  },
-  {
-    "id": 1731529685133,
-    "title": "jhadbnc",
-    "details": "ashgdmhcvbxn",
-    "semester": "hjdfsj",
-    "enrollstatus": "Available"
-  },
-  {
-    "id": 1731559647979,
-    "title": "hvhb",
-    "details": "nvhmb",
+    "id": "1731626562398",
+    "title": "DevOps and its Applications",
+    "details": "Its course code is: CS457...",
     "semester": "7",
-    "enrollstatus": "Available"
+    "enrollStatus": false
+  },
+  {
+    "id": "1731626562399",
+    "title": "Deep Computer Vision",
+    "details": "Its course code is: CS471...",
+    "semester": "7",
+    "enrollStatus": false
+  },
+  {
+    "id": "1731626562400",
+    "title": "Cybersecurity Techniques",
+    "details": "Its course code is: DS456...",
+    "semester": "7",
+    "enrollStatus": false
+  },
+  {
+    "id": "1731626562401",
+    "title": "Virtualization and Cloud Computing",
+    "details": "Its course code is: CS469...",
+    "semester": "7",
+    "enrollStatus": true
   }
 ]
