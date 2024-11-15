@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
@@ -9,8 +8,7 @@ const bcrypt = require('bcrypt');
 const fs = require('fs');
 const path = require('path');
 
-//comment this while deploying it on cloud...
-// require('dotenv').config();
+require('dotenv').config();//comment this while deploying it on cloud...
 
 const app = express();
 
