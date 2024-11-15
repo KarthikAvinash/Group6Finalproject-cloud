@@ -10,6 +10,7 @@ This repository demonstrates how to containerize and run a MERN stack applicatio
 2. [Prerequisites](#prerequisites)
 3. [Setup Instructions](#setup-instructions)
 4. [Screenshots](#screenshots)
+5. [Live Demo](#livedemo)
 
 ## Overview
 
@@ -52,6 +53,10 @@ npm start
 ### Authentication
 <img width="1088" alt="image" src="https://github.com/user-attachments/assets/2b22bff7-a7dd-47a6-86fd-f382e60d969b">
 
+### OAuth
+<img width="522" alt="image" src="https://github.com/user-attachments/assets/9fac89fe-2d01-4166-abd2-08d8287c3c10">
+
+
 ### Get All Courses
 <img width="1043" alt="image" src="https://github.com/user-attachments/assets/42f5d180-ca91-4e00-9585-19e605ca52fd">
 
@@ -63,6 +68,11 @@ npm start
 
 ### Delete Course
 <img width="462" alt="image" src="https://github.com/user-attachments/assets/ed97d0ff-ade2-412d-9a17-cae582909784">
+
+## Live Demo 🌐
+
+Check out the live application hosted on IBM Cloud:
+👉 [Live Demo Link](https://group6frontend.1o809c3feyfk.us-south.codeengine.appdomain.cloud/)
 
 ```
 
