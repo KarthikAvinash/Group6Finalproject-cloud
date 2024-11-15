@@ -45,8 +45,6 @@ Run the following command in both the frontend and backend directories to instal
 npm i
 ```
 ```
-
-- then run this in both the directories: 
 ```
 Then run this in both the directories: 
 ```
